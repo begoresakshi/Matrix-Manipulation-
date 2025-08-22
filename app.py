@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def input_matrix(name):
     rows = int(input(f"Enter number of rows for {name}: "))
     cols = int(input(f"Enter number of columns for {name}: "))
@@ -13,6 +14,7 @@ def input_matrix(name):
         data.append(row)
     return np.array(data)
 
+
 def visualize_matrix_interactive(matrix, title="Matrix"):
     fig, ax = plt.subplots()
     ax.set_axis_off()
@@ -21,7 +23,7 @@ def visualize_matrix_interactive(matrix, title="Matrix"):
 
     for i in range(rows):
         for j in range(cols):
-            text = f"[{matrix[i,j]:.2f}]"
+            text = f"[{matrix[i, j]:.2f}]"
             t = ax.text(j, rows - i - 1, text, ha='center', va='center', fontsize=14,
                         bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=0.3'))
             texts.append((t, i, j))
@@ -33,10 +35,11 @@ def visualize_matrix_interactive(matrix, title="Matrix"):
 
     plt.show()
 
+
 def main():
     print("Matrix Operations (Interactive Output)\n")
     while True:
-        print("Supported operations:")
+        print("\nSupported operations:")
         print("1. Add")
         print("2. Subtract")
         print("3. Multiply")
@@ -50,12 +53,12 @@ def main():
             print("Exiting program.")
             break
 
-        if choice not in {'1','2','3','4','5'}:
+        if choice not in {'1', '2', '3', '4', '5'}:
             print("Invalid choice. Please enter a number between 1 and 6.\n")
             continue
 
         try:
-            if choice in {'1','2','3'}:
+            if choice in {'1', '2', '3'}:
                 A = input_matrix("Matrix A")
                 B = input_matrix("Matrix B")
 
@@ -65,14 +68,16 @@ def main():
                         continue
                     result = A + B
                     print("Result (A + B):")
+
                 elif choice == '2':  # Subtract
                     if A.shape != B.shape:
                         print("Error: Matrices must have the same shape for subtraction.\n")
                         continue
                     result = A - B
                     print("Result (A - B):")
+
                 elif choice == '3':  # Multiply
-                    if A.shape[1] != B.shape:
+                    if A.shape[1] != B.shape[0]:
                         print("Error: Number of columns of A must equal number of rows of B for multiplication.\n")
                         continue
                     result = np.matmul(A, B)
@@ -100,6 +105,7 @@ def main():
             print(f"Input error: {ve}\n")
         except Exception as e:
             print(f"Unexpected error: {e}\n")
+
 
 if __name__ == "__main__":
     main()
